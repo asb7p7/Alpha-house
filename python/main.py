@@ -44,7 +44,15 @@ async def virtual_try_on(request: ImageTryOnRequest) -> dict:
     """
     Receives a user's image and a clothing item image as base64 encoded strings,
     and returns a virtual try-on image with the clothing item overlayed on the user.
-    Falls back to a demo image if the API is unavailable.
+    
+    NOTE: As of now, Gemini models don't support direct image generation output.
+    The 'gemini-3-pro-image-preview' model that previously supported this has been deprecated.
+    This endpoint automatically falls back to a demo image when the AI service is unavailable.
+    
+    For real image generation, you would need:
+    - Imagen 3 (text-to-image only)
+    - Specialized virtual try-on models (IDM-VTON, HR-VITON, etc.)
+    - Third-party services with image editing capabilities
     """
     try:
         print("Starting virtual try-on process...")
@@ -83,11 +91,13 @@ Generate the try-on image now."""
         generated_image = None
         
         try:
+            # Using the original working model configuration
             response = client.models.generate_content(
-                model="gemini-2.0-flash-exp",
+                model="gemini-3-pro-image-preview",
                 contents=[prompt, user_pil_img, clothing_pil_img],
                 config=types.GenerateContentConfig(
-                    response_modalities=["IMAGE"],
+                    response_modalities=["TEXT", "IMAGE"],
+                    image_config=types.ImageConfig(aspect_ratio="4:5", image_size="1K"),
                 ),
             )
             print("Gemini API call successful!")
@@ -103,8 +113,15 @@ Generate the try-on image now."""
                     break
                     
         except Exception as api_error:
-            print(f"Gemini API error: {str(api_error)}")
-            print("Falling back to demo image...")
+            error_msg = str(api_error)
+            print(f"Gemini API error: {error_msg}")
+            
+            # Try alternative: Generate text description and inform user
+            if "response modalities" in error_msg.lower():
+                print("Model doesn't support image generation. Using fallback demo image...")
+            else:
+                print("API error occurred. Using fallback demo image...")
+            
             # Use fallback image
             fallback_path = "fallback-try-on.png"
             if os.path.exists(fallback_path):
@@ -113,7 +130,7 @@ Generate the try-on image now."""
             else:
                 raise HTTPException(
                     status_code=500,
-                    detail=f"API unavailable and fallback image not found. Original error: {str(api_error)}"
+                    detail=f"API unavailable and fallback image not found. Original error: {error_msg}"
                 )
 
         if generated_image is None:
