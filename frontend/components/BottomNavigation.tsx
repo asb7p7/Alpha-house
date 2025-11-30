@@ -25,16 +25,12 @@ const TAB_ITEMS: TabItem[] = [
         ),
     },
     {
-        id: 'search',
-        label: 'Search',
+        id: 'streaming',
+        label: 'Live',
         icon: (
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
+                <circle cx="18" cy="6" r="3" fill="red" />
             </svg>
         ),
     },
@@ -75,8 +71,12 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = memo(({
 }) => {
     const handleTabClick = useCallback((tabId: string) => {
         onTabChange(tabId);
-        if (tabId === 'home' && onNavigate) {
-            onNavigate('/feed');
+        if (onNavigate) {
+            if (tabId === 'home') {
+                onNavigate('/feed');
+            } else if (tabId === 'streaming') {
+                onNavigate('/streaming');
+            }
         }
     }, [onTabChange, onNavigate]);
 

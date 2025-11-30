@@ -46,6 +46,14 @@ export function VirtualTryOnModal({ isOpen, onClose, productImage }: VirtualTryO
         }
     };
 
+    const handleClose = () => {
+        // Reset all states when closing the modal
+        setGeneratedImage(null);
+        setUserImage(null);
+        setError(null);
+        onClose();
+    };
+
     const handleTryOn = async () => {
         if (!userImage) {
             setError("Please upload your photo first");
@@ -102,7 +110,7 @@ export function VirtualTryOnModal({ isOpen, onClose, productImage }: VirtualTryO
                 <div className="p-6 border-b border-gray-100 flex justify-between items-center sticky top-0 bg-white z-10">
                     <h2 className="text-xl font-bold text-gray-900">Virtual Try-On</h2>
                     <button
-                        onClick={onClose}
+                        onClick={handleClose}
                         className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                     >
                         <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
