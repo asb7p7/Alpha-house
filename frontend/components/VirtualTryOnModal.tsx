@@ -107,8 +107,8 @@ export function VirtualTryOnModal({ isOpen, onClose, productImage }: VirtualTryO
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
             <div className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
-                <div className="p-6 border-b border-gray-100 flex justify-between items-center sticky top-0 bg-white z-10">
-                    <h2 className="text-xl font-bold text-gray-900">Virtual Try-On</h2>
+                <div className="p-6 border-b border-[#D4AF37]/10 flex justify-between items-center sticky top-0 bg-white z-10">
+                    <h2 className="text-xl font-bold text-[#1A1A1A]">Virtual Try-On</h2>
                     <button
                         onClick={handleClose}
                         className="p-2 hover:bg-gray-100 rounded-full transition-colors"
@@ -129,12 +129,12 @@ export function VirtualTryOnModal({ isOpen, onClose, productImage }: VirtualTryO
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {/* User Image Section */}
                         <div className="space-y-4">
-                            <h3 className="font-semibold text-gray-700">1. Your Photo</h3>
+                            <h3 className="font-semibold text-[#1A1A1A]">1. Your Photo</h3>
                             <div
                                 onClick={() => fileInputRef.current?.click()}
                                 className={`
-                                    relative aspect-[3/4] rounded-xl border-2 border-dashed border-gray-300 
-                                    flex flex-col items-center justify-center cursor-pointer hover:border-pink-500 hover:bg-pink-50 
+                                    relative aspect-[3/4] rounded-xl border-2 border-dashed border-[#D4AF37]/30 
+                                    flex flex-col items-center justify-center cursor-pointer hover:border-[#D4AF37] hover:bg-[#F3E5AB]/10 
                                     transition-all overflow-hidden group
                                     ${!userImage ? 'bg-gray-50' : ''}
                                 `}
@@ -167,8 +167,8 @@ export function VirtualTryOnModal({ isOpen, onClose, productImage }: VirtualTryO
 
                         {/* Product Image Section */}
                         <div className="space-y-4">
-                            <h3 className="font-semibold text-gray-700">2. Product</h3>
-                            <div className="aspect-[3/4] rounded-xl border border-gray-200 overflow-hidden bg-gray-50">
+                            <h3 className="font-semibold text-[#1A1A1A]">2. Product</h3>
+                            <div className="aspect-[3/4] rounded-xl border border-[#D4AF37]/20 overflow-hidden bg-[#FFF8F0]">
                                 <img src={productImage} alt="Product" className="w-full h-full object-contain p-4" />
                             </div>
                         </div>
@@ -184,7 +184,7 @@ export function VirtualTryOnModal({ isOpen, onClose, productImage }: VirtualTryO
                                 transition-all transform active:scale-95
                                 ${!userImage || isLoading
                                     ? 'bg-gray-300 cursor-not-allowed'
-                                    : 'bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 hover:shadow-pink-500/25'
+                                    : 'bg-[#D4AF37] hover:bg-[#C5A059] hover:shadow-lg'
                                 }
                             `}
                         >
@@ -205,7 +205,7 @@ export function VirtualTryOnModal({ isOpen, onClose, productImage }: VirtualTryO
                     {/* Result Section */}
                     {generatedImage && (
                         <div className="space-y-4 animate-fadeIn">
-                            <h3 className="font-semibold text-gray-700 text-center text-xl">✨ Your Look</h3>
+                            <h3 className="font-semibold text-[#1A1A1A] text-center text-xl">✨ Your Look</h3>
                             <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-gray-100 max-w-sm mx-auto">
                                 <img src={generatedImage} alt="Generated Try-On" className="w-full h-full object-cover" />
                             </div>
@@ -213,13 +213,13 @@ export function VirtualTryOnModal({ isOpen, onClose, productImage }: VirtualTryO
                                 <a
                                     href={generatedImage}
                                     download="my-try-on.png"
-                                    className="px-6 py-2 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-800 transition-colors"
+                                    className="px-6 py-2 bg-[#1A1A1A] text-white rounded-full text-sm font-medium hover:bg-black transition-colors"
                                 >
                                     Download Image
                                 </a>
                                 <button
                                     onClick={() => setGeneratedImage(null)}
-                                    className="px-6 py-2 border border-gray-300 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-50 transition-colors"
+                                    className="px-6 py-2 border border-[#D4AF37] text-[#D4AF37] rounded-full text-sm font-medium hover:bg-[#F3E5AB]/10 transition-colors"
                                 >
                                     Try Another
                                 </button>

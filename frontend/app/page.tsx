@@ -11,7 +11,7 @@ export default function Home() {
   }, [router]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white">
+    <div className="flex min-h-screen items-center justify-center bg-[#FFF8F0]">
       <div className="text-gray-500">Redirecting to feed...</div>
     </div>
   );

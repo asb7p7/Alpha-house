@@ -81,19 +81,19 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = memo(({
     }, [onTabChange, onNavigate]);
 
     return (
-        <div className="sticky bottom-0 z-50 h-16 sm:h-20 bg-white border-t border-gray-200 flex items-center justify-around px-4 sm:px-8 shadow-lg">
+        <div className="sticky bottom-0 z-50 h-16 sm:h-20 bg-white border-t border-[#D4AF37]/20 flex items-center justify-around px-4 sm:px-8 shadow-lg">
             {TAB_ITEMS.map((item) => (
                 <button
                     key={item.id}
                     onClick={() => handleTabClick(item.id)}
-                    className={`flex flex-col items-center gap-1 transition-all ${activeTab === item.id ? 'text-pink-500 scale-110' : 'text-gray-400'
+                    className={`flex flex-col items-center gap-1 transition-all ${activeTab === item.id ? 'text-[#D4AF37] scale-110' : 'text-[#C5A059] opacity-70 hover:opacity-100'
                         }`}
                     aria-label={item.label}
                     aria-current={activeTab === item.id ? 'page' : undefined}
                 >
                     {item.icon}
                     {activeTab === item.id && (
-                        <div className="w-1 h-1 rounded-full bg-pink-500" aria-hidden="true" />
+                        <div className="w-1 h-1 rounded-full bg-[#D4AF37]" aria-hidden="true" />
                     )}
                 </button>
             ))}

@@ -14,10 +14,17 @@ export async function POST(request: NextRequest) {
         });
 
         if (!response.ok) {
-            const errorText = await response.text();
-            console.error('Python API error:', response.status, errorText);
+            let errorMessage = 'Try-on service failed';
+            try {
+                const errorData = await response.json();
+                errorMessage = errorData.detail || errorMessage;
+            } catch {
+                errorMessage = await response.text();
+            }
+
+            console.error('Python API error:', response.status, errorMessage);
             return NextResponse.json(
-                { error: `Try-on service failed: ${response.statusText}` },
+                { detail: errorMessage },
                 { status: response.status }
             );
         }
@@ -28,7 +35,7 @@ export async function POST(request: NextRequest) {
     } catch (error) {
         console.error('Try-on proxy error:', error);
         return NextResponse.json(
-            { error: 'Failed to connect to try-on service' },
+            { detail: error instanceof Error ? error.message : 'Failed to connect to try-on service' },
             { status: 500 }
         );
     }

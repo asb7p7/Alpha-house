@@ -19,7 +19,7 @@ interface ProductCardProps {
 }
 
 const ProductCard = memo<ProductCardProps>(({ product, isLiked, onToggleLike }) => (
-    <article className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all">
+    <article className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-[#D4AF37]/20">
         <Link
             href={`/products/${product.influ_product_id}/product/${product.id}`}
             aria-label={`View details for ${product.name}`}
@@ -163,15 +163,15 @@ export default function ProductPage({ params }: ProductPageProps) {
     }
 
     return (
-        <div className="flex flex-col h-screen bg-white">
-            <header className="sticky top-0 z-50 px-4 py-4 bg-white border-b border-gray-100 shadow-sm">
+        <div className="flex flex-col h-screen bg-[#FFF8F0]">
+            <header className="sticky top-0 z-50 px-4 py-4 bg-[#FFF8F0] border-b border-[#D4AF37]/10 shadow-sm">
                 <div className="flex items-center gap-3">
                     <button
                         onClick={handleBack}
-                        className="w-10 h-10 rounded-full hover:bg-gray-100 active:bg-gray-200 flex items-center justify-center transition-colors"
+                        className="w-10 h-10 rounded-full hover:bg-[#F3E5AB]/20 active:bg-[#F3E5AB]/40 flex items-center justify-center transition-colors border border-[#D4AF37]/20"
                         aria-label="Go back"
                     >
-                        <svg className="w-6 h-6" fill="none" stroke="#000" viewBox="0 0 24 24">
+                        <svg className="w-6 h-6" fill="none" stroke="#D4AF37" viewBox="0 0 24 24">
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
@@ -180,13 +180,13 @@ export default function ProductPage({ params }: ProductPageProps) {
                             />
                         </svg>
                     </button>
-                    <h1 className="text-lg font-bold text-gray-700 flex-1">
+                    <h1 className="text-lg font-bold text-[#1A1A1A] flex-1">
                         {influProduct?.name || "Shop the Look"}
                     </h1>
                 </div>
             </header>
 
-            <main className="flex-1 overflow-y-auto bg-gray-50 p-4">
+            <main className="flex-1 overflow-y-auto bg-[#FFF8F0] p-4">
                 <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto">
                     {products.length === 0 ? (
                         <div className="col-span-2 text-center py-12 text-gray-500">

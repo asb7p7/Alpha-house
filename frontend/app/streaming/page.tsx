@@ -110,7 +110,7 @@ interface ChatMessage {
 const LiveStreamCard = memo<{ stream: LiveStream; onClick: () => void }>(({ stream, onClick }) => (
     <article
         onClick={onClick}
-        className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer group"
+        className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer group border border-[#D4AF37]/20"
     >
         {/* Thumbnail with Live Badge */}
         <div className="relative aspect-[9/16] bg-gradient-to-br from-gray-200 to-gray-300 overflow-hidden">
@@ -153,7 +153,7 @@ const LiveStreamCard = memo<{ stream: LiveStream; onClick: () => void }>(({ stre
                     <img
                         src={stream.influencer.dp}
                         alt={stream.influencer.name}
-                        className="w-10 h-10 rounded-full object-cover ring-2 ring-pink-400"
+                        className="w-10 h-10 rounded-full object-cover ring-2 ring-[#D4AF37]"
                         loading="lazy"
                     />
                     {stream.isLive && (
@@ -173,7 +173,7 @@ const LiveStreamCard = memo<{ stream: LiveStream; onClick: () => void }>(({ stre
                 </div>
             </div>
 
-            <button className="w-full py-2.5 bg-gradient-to-r from-red-500 to-pink-500 text-white text-sm font-bold rounded-full hover:from-red-600 hover:to-pink-600 transition-all transform active:scale-95 hover:scale-105 shadow-lg hover:shadow-pink-500/50 flex items-center justify-center gap-2">
+            <button className="w-full py-2.5 bg-[#005834] text-white text-sm font-bold rounded-full hover:bg-[#00442a] transition-all transform active:scale-95 hover:scale-105 shadow-lg flex items-center justify-center gap-2">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />
                 </svg>
@@ -246,7 +246,7 @@ const LiveStreamModal = memo<{ stream: LiveStream | null; onClose: () => void }>
                         </div>
                     </div>
 
-                    <button className="px-4 py-2 bg-pink-600 text-white rounded-full text-sm font-bold hover:bg-pink-700 transition-colors">
+                    <button className="px-4 py-2 bg-[#D4AF37] text-white rounded-full text-sm font-bold hover:bg-[#C5A059] transition-colors">
                         Follow
                     </button>
                 </div>
@@ -355,13 +355,13 @@ export default function StreamingPage() {
     }, []);
 
     return (
-        <div className="flex flex-col h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+        <div className="flex flex-col h-screen bg-[#FFF8F0]">
             {/* Header */}
-            <header className="sticky top-0 z-40 px-4 py-4 bg-white/80 backdrop-blur-lg border-b border-gray-200 shadow-sm">
+            <header className="sticky top-0 z-40 px-4 py-4 bg-[#FFF8F0]/80 backdrop-blur-lg border-b border-[#D4AF37]/10 shadow-sm">
                 <div className="flex items-center justify-between">
                     <div>
-                        <h1 className="text-2xl font-bold bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent flex items-center gap-2">
-                            <svg className="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                        <h1 className="text-2xl font-bold text-[#1A1A1A] flex items-center gap-2">
+                            <svg className="w-8 h-8 text-[#D4AF37]" fill="currentColor" viewBox="0 0 24 24">
                                 <circle cx="12" cy="12" r="3" />
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" opacity="0.3" />
                             </svg>

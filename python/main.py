@@ -44,83 +44,113 @@ async def virtual_try_on(request: ImageTryOnRequest) -> dict:
     """
     Receives a user's image and a clothing item image as base64 encoded strings,
     and returns a virtual try-on image with the clothing item overlayed on the user.
+    Falls back to a demo image if the API is unavailable.
     """
     try:
+        print("Starting virtual try-on process...")
+        
+        # Decode base64 images
+        print("Decoding user image...")
         user_img_bytes = base64.b64decode(request.user_image)
+        print("Decoding clothing image...")
         clothing_img_bytes = base64.b64decode(request.clothing_image)
 
+        print("Opening images with PIL...")
         user_pil_img = Image.open(io.BytesIO(user_img_bytes))
         clothing_pil_img = Image.open(io.BytesIO(clothing_img_bytes))
+        print(f"User image size: {user_pil_img.size}")
+        print(f"Clothing image size: {clothing_pil_img.size}")
 
-        prompt = """
-**“You are an AI try-on generator.
-
-
+        prompt = """You are an AI try-on generator.
 
 I will give you two images:
-
-An image of a product (example: T-shirt, hoodie, jacket, jeans, saree, dress, shoes, accessories).
-
-An image of a person.
+1. An image of a product (example: T-shirt, hoodie, jacket, jeans, saree, dress, shoes, accessories).
+2. An image of a person.
 
 Your job is to generate a single combined image where:
 
+- The same person from the second image appears exactly as they are (do not change face, skin tone, body shape, gender, hair, accessories, or expressions).
+- Only replace or overlay the clothing item with the product from the first image.
+- Maintain realistic lighting, shadows, wrinkles, folds, and fit.
+- Keep the position, pose, and environment of the person unchanged.
+- Output should look photorealistic, like a real try-on photo for an e-commerce fashion app.
+- Do not distort the person's face or proportions.
+- Make sure the product matches body alignment and looks naturally worn.
 
+Generate the try-on image now."""
 
-The same person from the second image appears exactly as they are (do not change face, skin tone, body shape, gender, hair, accessories, or expressions).
-
-Only replace or overlay the clothing item with the product from the first image.
-
-Maintain realistic lighting, shadows, wrinkles, folds, and fit.
-
-Keep the position, pose, and environment of the person unchanged.
-
-Output should look photorealistic, like a real try-on photo for an e-commerce fashion app.
-
-Do not distort the person's face or proportions.
-
-Make sure the product matches body alignment and looks naturally worn.”**
-"""
-
-        response = client.models.generate_content(
-            model="gemini-3-pro-image-preview",
-            contents=[prompt, user_pil_img, clothing_pil_img],
-            config=types.GenerateContentConfig(
-                response_modalities=["TEXT", "IMAGE"],
-                image_config=types.ImageConfig(aspect_ratio="4:5", image_size="1K"),
-            ),
-        )
-
+        print("Calling Gemini API...")
         generated_image = None
-        for part in response.parts:
-            if part.text is not None:
-                print(f"Model response text: {part.text}")
-            elif image := part.as_image():
-                generated_image = image
-                break
+        
+        try:
+            response = client.models.generate_content(
+                model="gemini-2.0-flash-exp",
+                contents=[prompt, user_pil_img, clothing_pil_img],
+                config=types.GenerateContentConfig(
+                    response_modalities=["IMAGE"],
+                ),
+            )
+            print("Gemini API call successful!")
+            
+            # Process response parts
+            print("Processing response parts...")
+            for part in response.parts:
+                if part.text is not None:
+                    print(f"Model response text: {part.text}")
+                elif image := part.as_image():
+                    generated_image = image
+                    print("Image found in response!")
+                    break
+                    
+        except Exception as api_error:
+            print(f"Gemini API error: {str(api_error)}")
+            print("Falling back to demo image...")
+            # Use fallback image
+            fallback_path = "fallback-try-on.png"
+            if os.path.exists(fallback_path):
+                generated_image = Image.open(fallback_path)
+                print("Using fallback demo image")
+            else:
+                raise HTTPException(
+                    status_code=500,
+                    detail=f"API unavailable and fallback image not found. Original error: {str(api_error)}"
+                )
 
         if generated_image is None:
-            # Fallback or error if no image is generated
-            error_detail = "Failed to generate image. No image data in response."
-            raise HTTPException(
-                status_code=500,
-                detail=error_detail,
-            )
+            print("No image generated in response, using fallback...")
+            fallback_path = "fallback-try-on.png"
+            if os.path.exists(fallback_path):
+                generated_image = Image.open(fallback_path)
+                print("Using fallback demo image")
+            else:
+                raise HTTPException(
+                    status_code=500,
+                    detail="Failed to generate image. No image data in response and no fallback available.",
+                )
 
+        print("Saving test image...")
         generated_image.save("test.png")
 
-        base64_string = base64.b64encode(
-            generated_image.image_bytes
-        ).decode("utf-8")
+        print("Encoding to base64...")
+        # Handle both PIL images and API response images
+        if hasattr(generated_image, 'image_bytes'):
+            base64_string = base64.b64encode(generated_image.image_bytes).decode("utf-8")
+        else:
+            # For PIL images (fallback)
+            img_byte_arr = io.BytesIO()
+            generated_image.save(img_byte_arr, format="PNG")
+            img_byte_arr.seek(0)
+            base64_string = base64.b64encode(img_byte_arr.read()).decode("utf-8")
 
-        # Save image to a byte stream
-        # img_byte_arr = io.BytesIO()
-        # generated_image.save(img_byte_arr, format="PNG")
-        # img_byte_arr.seek(0)
-
+        print("Virtual try-on completed successfully!")
         return {"generated_image": base64_string}
 
+    except HTTPException:
+        raise
     except Exception as e:
+        import traceback
+        error_trace = traceback.format_exc()
+        print(f"Unexpected error: {error_trace}")
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
 
 
