@@ -1,0 +1,6 @@
+2025/11/30 04:07:02 Connecting to LOCAL PostgreSQL database...
+
+2025/11/30 04:07:02 [35m/Users/yaswanthbonumaddi/yaswanth/hackathon/Alpha-house/backend/main.go:83
+[0m[31m[error] [0mfailed to initialize database, got error failed to connect to `host=localhost user=aura database=alpha`: dial error (dial tcp 127.0.0.1:5432: connect: connection refused)
+2025/11/30 04:07:02 Failed to connect to database:failed to connect to `host=localhost user=aura database=alpha`: dial error (dial tcp 127.0.0.1:5432: connect: connection refused)
+exit status 1

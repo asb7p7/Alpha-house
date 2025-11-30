@@ -1,0 +1,38 @@
+
+> frontend@0.1.0 dev /Users/yaswanthbonumaddi/yaswanth/hackathon/Alpha-house/frontend
+> next dev --port 3000
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/yaswanthbonumaddi/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/yaswanthbonumaddi/yaswanth/hackathon/Alpha-house/frontend/pnpm-lock.yaml
+
+   ▲ Next.js 16.0.5 (Turbopack)
+   - Local:         http://localhost:3000
+   - Network:       http://192.168.0.187:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 511ms
+ GET / 200 in 1124ms (compile: 1058ms, render: 66ms)
+ GET /feed 200 in 186ms (compile: 173ms, render: 13ms)
+ GET /feed 200 in 46ms (compile: 6ms, render: 41ms)
+ GET /feed 200 in 40ms (compile: 4ms, render: 35ms)
+   Reload env: .env.local
+ ✓ Compiled in 6ms
+ GET /feed 200 in 94ms (compile: 51ms, render: 42ms)
+ GET /feed 200 in 14ms (compile: 3ms, render: 10ms)
+ GET /feed 200 in 52ms (compile: 3ms, render: 49ms)
+ GET /feed 200 in 34ms (compile: 4ms, render: 30ms)
+   Reload env: .env.local
+ ✓ Compiled in 5ms
+ GET /feed 200 in 95ms (compile: 51ms, render: 44ms)
+ GET /feed 200 in 13ms (compile: 4ms, render: 9ms)
+ GET /feed 200 in 68ms (compile: 39ms, render: 29ms)
+ GET /feed 200 in 11ms (compile: 1692µs, render: 9ms)
+ GET /feed 200 in 67ms (compile: 3ms, render: 64ms)
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[?25h

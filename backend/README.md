@@ -1,21 +1,26 @@
 # Alpha House Backend API
 
-A Go backend application using Gin framework and GORM for managing influencer products.
+A Go backend application using Gin framework and pgx/v5 for managing influencer products.
 
 ## Technologies
 - **Go** - Programming language
 - **Gin** - Web framework
-- **GORM** - ORM library
-- **PostgreSQL** - Database
+- **pgx/v5** - PostgreSQL driver with connection pooling
+- **Neon PostgreSQL** - Serverless PostgreSQL database
 
 ## Database Configuration
 
-The application connects to PostgreSQL with the following settings:
-- **Host**: localhost
-- **Port**: 5432
-- **Database**: alpha
-- **Username**: aura
-- **Password**: aura@123
+The application uses environment variables for database configuration:
+- Create a `.env` file in the backend directory
+- Add your `DATABASE_URL` connection string
+
+Example `.env`:
+```
+DATABASE_URL='postgresql://username:password@host/database?sslmode=require'
+```
+
+The application uses **Neon PostgreSQL** (serverless) for production and can connect to any PostgreSQL database via the `DATABASE_URL` environment variable.
+
 
 ## Database Schema
 
@@ -136,15 +141,27 @@ Returns all products for a specific influencer product.
 
 ### Prerequisites
 1. Go 1.21 or higher installed
-2. PostgreSQL installed and running
-3. Database named `alpha` created in PostgreSQL
+2. PostgreSQL database (Neon or local)
+3. Database connection string
 
-### Create Database
+### Configure Environment
+Create a `.env` file in the `backend` directory:
+```bash
+cd backend
+cp .env.example .env
+# Edit .env and add your DATABASE_URL
+```
+
+For **Neon PostgreSQL**, get your connection string from [Neon Console](https://console.neon.tech/).
+
+For **Local PostgreSQL**:
 ```sql
 CREATE DATABASE alpha;
 CREATE USER aura WITH PASSWORD 'aura@123';
 GRANT ALL PRIVILEGES ON DATABASE alpha TO aura;
 ```
+
+Then use: `DATABASE_URL='postgresql://aura:aura@123@localhost:5432/alpha?sslmode=disable'`
 
 ### Install Dependencies
 ```bash
@@ -158,6 +175,7 @@ go run main.go
 ```
 
 Or build and run:
+
 ```bash
 go build -o server
 ./server

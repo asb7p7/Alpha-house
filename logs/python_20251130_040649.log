@@ -1,0 +1,21 @@
+Downloading pydantic-core (1.8MiB)
+Downloading google-api-python-client (14.0MiB)
+Downloading grpcio (11.3MiB)
+Downloading pillow (4.4MiB)
+Downloading uvloop (1.3MiB)
+Downloading google-ai-generativelanguage (1.3MiB)
+ Downloading google-ai-generativelanguage
+ Downloading uvloop
+ Downloading pydantic-core
+ Downloading pillow
+ Downloading grpcio
+ Downloading google-api-python-client
+Installed 48 packages in 39ms
+INFO:     Started server process [25202]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [25202]

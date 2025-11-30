@@ -1,0 +1,34 @@
+2025/11/30 04:14:08 Tables created/verified successfully!
+2025/11/30 04:14:08 Database connected successfully!
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /api/profiles             --> main.GetProfiles (4 handlers)
+[GIN-debug] GET    /api/influ-products       --> main.GetInfluProducts (4 handlers)
+[GIN-debug] GET    /api/products/:influ_product_id --> main.GetProductsByInfluProductID (4 handlers)
+[GIN-debug] GET    /api/product/:id          --> main.GetProductByID (4 handlers)
+2025/11/30 04:14:08 Server starting on port 8080...
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2025/11/30 - 04:14:42 | 200 |  662.866125ms |             ::1 | GET      "/api/profiles"
+[GIN] 2025/11/30 - 04:16:15 | 204 |      24.583µs |             ::1 | OPTIONS  "/profiles"
+[GIN] 2025/11/30 - 04:16:15 | 204 |       9.958µs |             ::1 | OPTIONS  "/influ-products"
+[GIN] 2025/11/30 - 04:16:15 | 204 |           5µs |             ::1 | OPTIONS  "/profiles"
+[GIN] 2025/11/30 - 04:16:15 | 204 |       3.916µs |             ::1 | OPTIONS  "/influ-products"
+[GIN] 2025/11/30 - 04:16:22 | 204 |      12.167µs |             ::1 | OPTIONS  "/profiles"
+[GIN] 2025/11/30 - 04:16:22 | 204 |        3.75µs |             ::1 | OPTIONS  "/influ-products"
+[GIN] 2025/11/30 - 04:16:29 | 204 |       4.791µs |             ::1 | OPTIONS  "/profiles"
+[GIN] 2025/11/30 - 04:16:29 | 204 |       2.542µs |             ::1 | OPTIONS  "/influ-products"
+[GIN] 2025/11/30 - 04:16:33 | 404 |       2.958µs |             ::1 | GET      "/profiles"
+[GIN] 2025/11/30 - 04:16:33 | 404 |       2.834µs |             ::1 | GET      "/favicon.ico"
+[GIN] 2025/11/30 - 04:16:42 | 204 |        6.25µs |             ::1 | OPTIONS  "/api/profiles"
+[GIN] 2025/11/30 - 04:16:42 | 204 |      27.542µs |             ::1 | OPTIONS  "/api/influ-products"
+[GIN] 2025/11/30 - 04:16:42 | 204 |      11.458µs |             ::1 | OPTIONS  "/api/profiles"
+[GIN] 2025/11/30 - 04:16:42 | 204 |       2.125µs |             ::1 | OPTIONS  "/api/influ-products"
+[GIN] 2025/11/30 - 04:17:03 | 204 |       3.167µs |             ::1 | OPTIONS  "/api/influ-products"
+[GIN] 2025/11/30 - 04:17:03 | 204 |       1.458µs |             ::1 | OPTIONS  "/api/profiles"
+signal: interrupt

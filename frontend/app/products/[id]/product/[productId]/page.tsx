@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { getProductById, type Product } from "../../../../../lib/api";
 import { LoadingSpinner } from "../../../../../components/LoadingSpinner";
 import { ErrorMessage } from "../../../../../components/ErrorMessage";
+import { VirtualTryOnModal } from "../../../../../components/VirtualTryOnModal";
 
 interface ProductDetailPageProps {
     params: Promise<{ id: string; productId: string }>;
@@ -14,6 +15,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
     const [productData, setProductData] = useState<Product | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [isTryOnOpen, setIsTryOnOpen] = useState(false);
     const router = useRouter();
 
     const fetchData = useCallback(async () => {
@@ -56,9 +58,8 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
     }, [productData]);
 
     const handleTryOn = useCallback(() => {
-        // TODO: Implement AR try-on functionality
-        console.log("Try on clicked for product:", productData?.id);
-    }, [productData]);
+        setIsTryOnOpen(true);
+    }, []);
 
     if (loading) {
         return <LoadingSpinner />;
@@ -159,6 +160,12 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                     </div>
                 </article>
             </main>
+
+            <VirtualTryOnModal
+                isOpen={isTryOnOpen}
+                onClose={() => setIsTryOnOpen(false)}
+                productImage={productData.image}
+            />
         </div>
     );
 }

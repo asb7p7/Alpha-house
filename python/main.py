@@ -15,6 +15,16 @@ load_dotenv()
 # Create the FastAPI app
 app = FastAPI(title="Virtual Try-On API")
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
+
 # Initialize the client
 try:
     client = genai.Client(api_key=os.environ["GOOGLE_API_KEY"])
@@ -117,4 +127,5 @@ Make sure the product matches body alignment and looks naturally worn.”**
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8001)
+
