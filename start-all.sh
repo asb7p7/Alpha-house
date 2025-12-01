@@ -172,11 +172,11 @@ fi
 
 # Update the dev script to use port 3000 instead of 8000
 if command -v pnpm &> /dev/null; then
-    pnpm dev --port 3000 > "${LOG_DIR}/frontend_${TIMESTAMP}.log" 2>&1 &
+    pnpm start --port 3000 > "${LOG_DIR}/frontend_${TIMESTAMP}.log" 2>&1 &
 elif command -v yarn &> /dev/null; then
-    yarn dev --port 3000 > "${LOG_DIR}/frontend_${TIMESTAMP}.log" 2>&1 &
+    yarn start --port 3000 > "${LOG_DIR}/frontend_${TIMESTAMP}.log" 2>&1 &
 else
-    npm run dev -- --port 3000 > "${LOG_DIR}/frontend_${TIMESTAMP}.log" 2>&1 &
+    npm run start -- --port 3000 > "${LOG_DIR}/frontend_${TIMESTAMP}.log" 2>&1 &
 fi
 
 FRONTEND_PID=$!

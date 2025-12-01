@@ -28,10 +28,10 @@ const LIVE_STREAMS: LiveStream[] = [
             username: "@sarahstyle"
         },
         title: "Summer Fashion Haul 2024 🌸",
-        thumbnail: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&auto=format",
+        thumbnail: "/images/streaming/steam1.jpg",
         viewers: 1243,
         isLive: true,
-        category: "Fashion"
+        category: "Fashion Haul"
     },
     {
         id: "2",
@@ -40,11 +40,11 @@ const LIVE_STREAMS: LiveStream[] = [
             dp: "https://i.pravatar.cc/150?img=9",
             username: "@emmaglam"
         },
-        title: "Makeup Tutorial: Glowy Summer Look ✨",
-        thumbnail: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&auto=format",
+        title: "Makeup & Outfit Styling Session ✨",
+        thumbnail: "/images/streaming/steam2.jpg",
         viewers: 892,
         isLive: true,
-        category: "Beauty"
+        category: "Beauty & Style"
     },
     {
         id: "3",
@@ -54,7 +54,7 @@ const LIVE_STREAMS: LiveStream[] = [
             username: "@alexstreet"
         },
         title: "Street Style Try-On Session 👟",
-        thumbnail: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&auto=format",
+        thumbnail: "/images/streaming/steam3.jpg",
         viewers: 2156,
         isLive: true,
         category: "Streetwear"
@@ -66,8 +66,8 @@ const LIVE_STREAMS: LiveStream[] = [
             dp: "https://i.pravatar.cc/150?img=16",
             username: "@mayachic"
         },
-        title: "Vintage Fashion Finds 🛍️",
-        thumbnail: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400&auto=format",
+        title: "Vintage Thrift Store Finds 🛍️",
+        thumbnail: "/images/streaming/steam4.jpg",
         viewers: 567,
         isLive: true,
         category: "Vintage"
@@ -79,8 +79,8 @@ const LIVE_STREAMS: LiveStream[] = [
             dp: "https://i.pravatar.cc/150?img=13",
             username: "@jamesfits"
         },
-        title: "Fitness Fashion & Activewear Review 💪",
-        thumbnail: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&auto=format",
+        title: "Activewear & Fitness Style Guide 💪",
+        thumbnail: "/images/streaming/stream5.jpg",
         viewers: 1678,
         isLive: true,
         category: "Activewear"
@@ -92,11 +92,11 @@ const LIVE_STREAMS: LiveStream[] = [
             dp: "https://i.pravatar.cc/150?img=20",
             username: "@sophialux"
         },
-        title: "Luxury Unboxing & Styling Tips 👜",
-        thumbnail: "https://images.unsplash.com/photo-15029606334343-a7bb3ad29d51?w=400&auto=format",
+        title: "Designer Bag Unboxing & Review 👜",
+        thumbnail: "/images/streaming/stream6.jpg",
         viewers: 3421,
         isLive: true,
-        category: "Luxury"
+        category: "Luxury Fashion"
     }
 ];
 
@@ -113,7 +113,7 @@ const LiveStreamCard = memo<{ stream: LiveStream; onClick: () => void }>(({ stre
         className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer group border border-[#D4AF37]/20"
     >
         {/* Thumbnail with Live Badge */}
-        <div className="relative aspect-[9/16] bg-gradient-to-br from-gray-200 to-gray-300 overflow-hidden">
+        <div className="relative aspect-video bg-gradient-to-br from-gray-200 to-gray-300 overflow-hidden">
             <img
                 src={stream.thumbnail}
                 alt={stream.title}
